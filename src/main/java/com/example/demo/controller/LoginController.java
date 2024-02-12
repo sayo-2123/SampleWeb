@@ -1,13 +1,16 @@
 package com.example.demo.controller;
 
+import org.springframework.context.MessageSource;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.example.demo.constant.ErrorMessageConst;
 import com.example.demo.form.LoginForm;
 import com.example.demo.service.LoginService;
+import com.example.demo.util.AppUtil;
 
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.var;
@@ -26,6 +29,9 @@ public class LoginController {
 	
 	/** PasswordEncoder*/
 	private final PasswordEncoder passwordEncoder;
+	
+	/**メッセージソース*/
+	private final MessageSource messageSource;
 	
 	/**
 	 * 初期表示
@@ -56,8 +62,8 @@ public class LoginController {
 		if (isCorrectUserAuth) {
 			return "redirect:/menu";
 		} else {
-			//TODO エラーメッセージはプロパティファイルで管理する
-			model.addAttribute("errorMsg", "ログインIDとパスワードの組み合わせが間違っています。");
+			var errorMsg = AppUtil.getMessage(messageSource, ErrorMessageConst.LOGIN_WRONG_INPUT);
+			model.addAttribute("errorMsg", errorMsg);
 			return "login";
 		}
 	}
