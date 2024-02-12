@@ -9,11 +9,21 @@ import com.example.demo.repository.UserInfoRepository;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ * ログイン画面 Service
+ */
 @Service
 @RequiredArgsConstructor
 public class LoginService {
+	/** ユーザー情報テーブルDAO */
 	private final UserInfoRepository repository;
 
+	/**
+	 * ユーザー検索テーブル 検索結果
+	 * 
+	 * @param loginId ログインID
+	 * @return ユーザー情報テーブルを主キー検索した結果(1件)
+	 */
 	public Optional<UserInfo> searchUserById(String loginId) {
 		return repository.findById(loginId);
 	}

@@ -10,19 +10,39 @@ import com.example.demo.service.LoginService;
 
 import lombok.RequiredArgsConstructor;
 
-
+/**
+ * ログイン Controller
+ * 
+ */
 @Controller
 @RequiredArgsConstructor
 public class LoginController {
+	
+	/** ログインservice */
 
 	private final LoginService service;
+	
+	/**
+	 * 初期表示
+	 * 
+	 * @param model モデル
+	 * @param form 入力情報
+	 * @return 表示画面
+	 */
 
 	@GetMapping("/login")
 	public String view(Model model, LoginForm form) {
 
 		return "login";
 	}
-
+	
+	/**
+	 * 初期表示
+	 * 
+	 * @param model モデル
+	 * @param form 入力情報
+	 * @return 表示画面
+	 */
 	@PostMapping("/login")
 	public String login(Model model, LoginForm form) {
 		var userInfo = service.searchUserById(form.getLoginId());
