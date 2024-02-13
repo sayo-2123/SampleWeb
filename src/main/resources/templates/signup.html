@@ -2,26 +2,31 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
+	<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.2.3/css/bootstrap.min.css}">
+	<script type="text/javascript" th:scr="@{/webjars/jquery/3.6.4/jquery.min.js}"></script>
 	<meta charset="UTF-8">
-	<title>新規登録画面</title>
+	<title>ユーザー登録画面</title>
 </head>
 
 <body>
-	<h2>新規登録画面</h2>
-	<span th:text="${message}"></span>
-	<form th:action="@{/signup}" method="post" th:object="${signupForm}">
-		<div>
-			<label>ログインID</label>
-			<input type="text" th:field="*{loginId}">
-		</div>
-		<div>
-			<label>パスワード</label>
-			<input type="password" th:field="*{password}">
-		</div>
-		<div>
-			<input type="submit" value="登録">
-		</div>
-	</form>
+	<div class="container=fluid">
+		<h2>ユーザー登録画面</h2>
+		<span th:text="${message}"></span>
+		<form th:action="@{/signup}" method="post" th:object="${signupForm}">
+			<div class="form-group">
+				<div class="col-3 col-md-2 col-xxl-1">
+					<p><label for="loginId">ログインID</label>
+						<input type="text" class="form-control" th:field="*{loginId}">
+				</div>
+				<div class="col-3 col-md-2 col-xxl-1">
+					<p><label for="password">パスワード</label>
+						<input type="password" class="form-control" th:field="*{password}">
+				</div>
+				<p><input type="submit" value="登録">
+			</div>
+		</form>
+		<a th:href="@{/login}">▶ログイン画面へ戻る</a>
+	</div>
 </body>
 
 </html>
