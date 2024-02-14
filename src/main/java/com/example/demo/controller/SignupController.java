@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.example.demo.constant.MessageConst;
+import com.example.demo.constant.SignupMessage;
 import com.example.demo.entity.UserInfo;
 import com.example.demo.form.SignupForm;
 import com.example.demo.service.SignupService;
@@ -55,15 +55,22 @@ public class SignupController {
 	@PostMapping("/signup")
 	public void signup(Model model, SignupForm form) {
 		var userInfoOpt = service.resistUserInfo(form);
-		var message = AppUtil.getMessage(messageSource, judgeMessageKey(userInfoOpt));
-		model.addAttribute("message", message);
-	
+		var signupMessage = judgeMessageKey(userInfoOpt);
+		var messageId = AppUtil.getMessage(messageSource, signupMessage.getMessageId());
+		model.addAttribute("message", messageId);
+		model.addAttribute("isError", signupMessage.isError());
 	}
-	private String judgeMessageKey(Optional<UserInfo> userInfoOpt) {
+	
+	/**
+	 * ユーザー登録情報の結果メッセージを判断する
+	 * @param userInfoOptユーザ登録結果(登録済みだった場合はEmpty)
+	 * @return　メッセージキー
+	 */
+	private SignupMessage judgeMessageKey(Optional<UserInfo> userInfoOpt) {
 		if(userInfoOpt.isEmpty()) {
-			return MessageConst.SIGNUP_EXISTED_LOGIN_ID;
+			return SignupMessage.EXISTED_LOGIN_ID;
 		}else {
-			return MessageConst.SIGNUP_RESIST_SUCCEED;
+			return SignupMessage.SUCCEED;
 		}
 	}
 }
