@@ -14,7 +14,7 @@ import lombok.RequiredArgsConstructor;
  */
 @Service
 @RequiredArgsConstructor
-public class LoginService {
+public class LoginServiceImpl {
 	/** ユーザー情報テーブルDAO */
 	private final UserInfoRepository repository;
 

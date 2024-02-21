@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.example.demo.constant.UrlConst;
 import com.example.demo.form.LoginForm;
-import com.example.demo.service.LoginService;
+import com.example.demo.service.LoginServiceImpl;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +24,7 @@ import lombok.experimental.var;
 public class LoginController {
 	
 	/** ログイン画面 service */
-	private final LoginService service;
+	private final LoginServiceImpl service;
 	
 	/** PasswordEncoder*/
 	private final PasswordEncoder passwordEncoder;
